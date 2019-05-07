@@ -1,0 +1,93 @@
+::placeholder {
+    color: white;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+h1 span {
+    font-weight: bolder;
+    color: #d78c2f;
+}
+
+.login {
+    display: block;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.login img {
+    max-width: 20%;
+    margin: 0 auto;
+    display: block;
+}
+
+.login form {
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-control {
+    background-color: #cacacb;
+    border: none;
+    border-top: 0.25em solid #d78c2f;
+    border-right: 0.25em solid #d78c2f;
+    border-bottom: 0.25em solid #d78c2f;
+    border-radius: 1em;
+    color: white;
+}
+
+.input-group-text {
+    background-color: #cacacb;
+    color: #d78c2f;
+    border: none;
+    border-top: 0.25em solid #d78c2f;
+    border-left: 0.25em solid #d78c2f;
+    border-bottom: 0.25em solid #d78c2f;
+    border-radius: 1em;
+    padding: 0;
+    padding-left: 1em;
+}
+
+.btn-login {
+    border-color: #eda042;
+    border-radius: 1em;
+    background-color: #eda042;
+}
+
+.btn-login:hover {
+    background-color: #d78c2f;
+    border-color: #d78c2f;
+}
+
+.login a {
+    color: #d78c2f;
+    display: block;
+    text-align: center;
+}
+
+.form-check {
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #afa777;
+    border-top: 0.25em solid #d78c2f;
+    color: white;
+    padding: 0.5em;
+    height: 50px;
+}
+
+footer img {
+    max-width: 15%;
+    position: absolute;
+    left: 5%;
+    bottom: 40px;
+}
