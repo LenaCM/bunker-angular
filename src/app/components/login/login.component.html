@@ -1,13 +1,15 @@
 <div class="login">
     <img src="assets/img/login.png" alt="">
     <h1><span>Bunker</span> suplementos</h1>
-    <div class="form">
-        <form action="">
+    <div class="form" *ngIf="!_userService.token">
+        <form action="" (ngSubmit)="login(loginF)" #loginF="ngForm">
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-user"></i></div>
                 </div>
-                <input type="text" class="form-control" placeholder="usuario">
+                <input type="text" class="form-control" placeholder="usuario" name="login-username" [(ngModel)]="user.username">
+                <span *ngFor="let error of _userService.errors.username"><br />
+                    {{ error }}</span>
             </div>
 
             <div class="input-group mb-2 mr-sm-2">
@@ -15,18 +17,30 @@
                     <div class="input-group-text"><i class="fas fa-unlock"></i>
                     </div>
                 </div>
-                <input type="password" class="form-control" placeholder="••••••••••">
+                <input type="password" class="form-control" placeholder="••••••••••" name="login-password" [(ngModel)]="user.password">
             </div>
 
             <button type="submit" class="btn btn-primary btn-block btn-login">ENVIAR</button>
+            <div class="col-sm-12">
+                <span *ngFor="let error of _userService.errors.non_field_errors">{{ error }}<br /></span>
+            </div>
 
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
+
             </div>
         </form>
         <a href="">¿Olvidaste tu contraseña?</a>
+
     </div>
+    <div class="row" *ngIf="_userService.token">
+        <div class="col-sm-12">You are logged in as {{ _userService.username }}.<br /> Token Expires: {{ _userService.token_expires }}<br />
+            <button (click)="refreshToken()" class="btn btn-primary">Refresh Token</button>
+            <button (click)="logout()" class="btn btn-primary">Log Out</button>
+        </div>
+    </div>
+
 </div>
 <footer>
     <img src="assets/img/tanque.png" alt=""> Copyright etc
