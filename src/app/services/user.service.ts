@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UserService {
@@ -15,10 +17,15 @@ export class UserService {
    // error messages received from the login attempt
    public errors: any = [];
 
+   httpHeaders = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+   baseUrl: string = environment.apiUrl;
+
    constructor(private http: HttpClient) {
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
+
+
   }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
@@ -61,5 +68,10 @@ export class UserService {
     const token_decoded = JSON.parse(window.atob(token_parts[1]));
     this.token_expires = new Date(token_decoded.exp * 1000);
     this.username = token_decoded.username;
+  }
+
+  loginUser(userData: any):Observable<any>{
+    const url = `${this.baseUrl}auth/`;
+    return this.http.post(url, userData, {headers: this.httpHeaders});
   }
 }

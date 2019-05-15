@@ -1,15 +1,15 @@
 <div class="login">
     <img src="assets/img/login.png" alt="">
     <h1><span>Bunker</span> suplementos</h1>
-    <div class="form" *ngIf="!_userService.token">
-        <form action="" (ngSubmit)="login(loginF)" #loginF="ngForm">
+    <div class="form">
+        <form action="" (ngSubmit)="onLogin()" [formGroup]="userLogin">
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-user"></i></div>
                 </div>
-                <input type="text" class="form-control" placeholder="usuario" name="login-username" [(ngModel)]="user.username">
-                <span *ngFor="let error of _userService.errors.username"><br />
-                    {{ error }}</span>
+                <input type="text" class="form-control" placeholder="usuario" formControlName="username">
+                <span *ngIf="userLogin.get('username').hasError('required') && userLogin.get('username').touched"><br />
+                    El nombre de usuario es requerido.</span>
             </div>
 
             <div class="input-group mb-2 mr-sm-2">
@@ -17,10 +17,12 @@
                     <div class="input-group-text"><i class="fas fa-unlock"></i>
                     </div>
                 </div>
-                <input type="password" class="form-control" placeholder="••••••••••" name="login-password" [(ngModel)]="user.password">
+                <input type="password" class="form-control" placeholder="••••••••••" formControlName="password">
+                <span *ngIf="userLogin.get('password').hasError('required') && userLogin.get('password').touched"><br />
+                    La contraseña es requerida.</span>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block btn-login">ENVIAR</button>
+            <button type="submit" class="btn btn-primary btn-block btn-login" [disabled]="userLogin.invalid || loading">ENVIAR</button>
             <div class="col-sm-12">
                 <span *ngFor="let error of _userService.errors.non_field_errors">{{ error }}<br /></span>
             </div>
